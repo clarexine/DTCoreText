@@ -69,6 +69,26 @@
 		
 		NSDictionary *attributes = [self attributesDictionary];
 		
+		if (self.textTransform != DTHTMLElementTextTransformNone) {
+			NSString* tmpString = nil;
+			switch (self.textTransform) {
+				case DTHTMLElementTextTransformCapitalize:
+					tmpString = [text capitalizedString];
+					break;
+				case DTHTMLElementTextTransformUppercase:
+					tmpString = [text uppercaseString];
+					break;
+				case DTHTMLElementTextTransformLowercase:
+					tmpString = [text lowercaseString];
+					break;
+					
+				default:
+					tmpString = [text copy];
+					break;
+			}
+			return [[NSAttributedString alloc] initWithString:tmpString attributes:attributes];
+		}
+		
 		if (self.fontVariant == DTHTMLElementFontVariantNormal)
 		{
 			// make a new attributed string from the text

@@ -59,6 +59,7 @@
 	BOOL _containsAppleConvertedSpace;
 	
 	DTHTMLElementFontVariant _fontVariant;
+	DTHTMLElementTextTransform _textTransform;
 	
 	CGFloat _textScale;
 	CGSize _size;
@@ -202,6 +203,12 @@
  */
 
 @property (nonatomic, assign) DTHTMLElementFontVariant fontVariant;
+
+/**
+ The current text transform of the receiver, none, capitalize, uppercase, lowercase or inherit.
+ */
+
+@property (nonatomic, assign) DTHTMLElementTextTransform textTransform;
 
 /**
  The scale by which all fonts are scaled

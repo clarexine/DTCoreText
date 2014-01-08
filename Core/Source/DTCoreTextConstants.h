@@ -105,3 +105,12 @@ typedef enum
 	DTHTMLElementFontVariantSmallCaps
 } DTHTMLElementFontVariant;
 
+typedef enum
+{
+	DTHTMLElementTextTransformNone = 0,
+	DTHTMLElementTextTransformCapitalize,
+	DTHTMLElementTextTransformUppercase,
+	DTHTMLElementTextTransformLowercase,
+	DTHTMLElementTextTransformInherit,
+} DTHTMLElementTextTransform;
+

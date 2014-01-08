@@ -958,6 +958,31 @@ NSDictionary *_classesForNames = nil;
 		}
 	}
 	
+	NSString *textTransformStr = [[styles objectForKey:@"text-transform"] lowercaseString];
+	if (textTransformStr)
+	{
+		if ([textTransformStr isEqualToString:@"capitalize"])
+		{
+			_textTransform = DTHTMLElementTextTransformCapitalize;
+		}
+		else if ([textTransformStr isEqualToString:@"uppercase"])
+		{
+			_textTransform = DTHTMLElementTextTransformUppercase;
+		}
+		else if ([textTransformStr isEqualToString:@"lowercase"])
+		{
+			_textTransform = DTHTMLElementTextTransformLowercase;
+		}
+		else if ([textTransformStr isEqualToString:@"inherit"])
+		{
+			_textTransform = DTHTMLElementTextTransformInherit;
+		}
+		else
+		{
+			_textTransform = DTHTMLElementTextTransformNone;
+		}
+	}
+	
 	NSString *widthString = [styles objectForKey:@"width"];
 	if (widthString && ![widthString isEqualToString:@"auto"])
 	{
@@ -1199,6 +1224,7 @@ NSDictionary *_classesForNames = nil;
 	_headerLevel = element.headerLevel;
 
 	_fontVariant = element.fontVariant;
+	_textTransform = element.textTransform;
 	_underlineStyle = element.underlineStyle;
 	_strikeOut = element.strikeOut;
 	_superscriptStyle = element.superscriptStyle;
@@ -1317,6 +1343,21 @@ NSDictionary *_classesForNames = nil;
 	return _fontVariant;
 }
 
+- (DTHTMLElementTextTransform)textTransform
+{
+	if (_textTransform == DTHTMLElementTextTransformInherit)
+	{
+		if (self.parentElement)
+		{
+			return self.parentElement.textTransform;
+		}
+		
+		return DTHTMLElementTextTransformNone;
+	}
+	
+	return _textTransform;
+}
+
 - (void)setAttributes:(NSDictionary *)attributes
 {
 	[super setAttributes:[attributes copy]];
@@ -1382,6 +1423,7 @@ NSDictionary *_classesForNames = nil;
 @synthesize preserveNewlines = _preserveNewlines;
 @synthesize displayStyle = _displayStyle;
 @synthesize fontVariant = _fontVariant;
+@synthesize textTransform = _textTransform;
 @synthesize textScale = _textScale;
 @synthesize size = _size;
 @synthesize margins = _margins;
